@@ -1,11 +1,26 @@
 import { Routes } from '@angular/router';
-import { loadRemoteModule as loadNativeFederationRemote,  } from '@angular-architects/native-federation';
+import { loadRemoteModule as loadNativeFederationRemote, } from '@angular-architects/native-federation';
+import { WrapperConfig } from './components/wrapper/interfaces/wraper-config';
 
 
 export const routes: Routes = [
     {
         path: 'mfe-1',
         loadComponent: () => loadNativeFederationRemote('mfe-1', './Component').then(m => m.App),
+    },
+    {
+        // link to the repo
+        path: 'angular-19-mfe',
+        loadComponent: () => import('./components/wrapper/wrapper').then(m => m.Wrapper),
+        data: {
+            config: {
+                exposedModule: './web-component',
+                remoteName: 'angular-19-mfe',
+                elementName: 'angular-19-mfe',
+                kind: 'native-federation',
+                remoteEntry: 'http://localhost:5000/remoteEntry.json',
+            } as WrapperConfig
+        }
     },
     {
         path: '**',

@@ -1,0 +1,14 @@
+<ng-template #mfePlaceholder></ng-template>
+@let kind = this.config().kind;
+<p>
+    Loaded via
+    @if (kind === 'native-federation') {
+        <strong>
+            Native Federation
+        </strong>
+    }@else {
+        <strong>
+            Module Federation
+        </strong>
+    }
+</p>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, NgZone, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 declare const require: any;
@@ -13,4 +13,5 @@ declare const require: any;
 export class App {
   protected readonly title = signal('shell');
   protected readonly angularVersion = require('../../../../package.json').dependencies['@angular/core'];
+
 }
