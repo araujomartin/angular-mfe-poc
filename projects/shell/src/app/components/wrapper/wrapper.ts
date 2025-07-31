@@ -1,20 +1,22 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, input, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, viewChild, ViewContainerRef } from '@angular/core';
 import { WrapperConfig } from './interfaces/wraper-config';
 import { loadRemoteModule as loadNativeFederationRemote } from '@angular-architects/native-federation';
+import { loadRemoteModule as loadModuleFederationRemote } from '@angular-architects/module-federation';
+
 
 @Component({
-  selector: 'app-wrapper',
-  imports: [
+    selector: 'app-wrapper',
+    imports: [
 
-  ],
-  templateUrl: './wrapper.html',
-  styleUrl: './wrapper.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    ],
+    templateUrl: './wrapper.html',
+    styleUrl: './wrapper.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Wrapper {
     // readonly #elementRef = inject(ElementRef);
     // readonly #vcr = inject(ViewContainerRef);
-    
+
     protected readonly mfePlaceholder = viewChild('mfePlaceholder', { read: ViewContainerRef })
 
     // Don't forget to call withComponentInputBinding()
@@ -34,16 +36,26 @@ export class Wrapper {
                     console.log('Loaded Native Federation Remote')
                 }
             );
-
-            
         } else {
-            // console.log('Loading module federation remote')
+            try {
+                await loadModuleFederationRemote({
+                    remoteEntry,
+                    remoteName,
+                    exposedModule
+                }).then((m)=> {
+                    console.log('Loaded Module Federation Remote');
+                });
+            } catch (error) {
+                console.error(error);
+            }
+
+
         }
         // Create the element
         const mfePlaceholder = this.mfePlaceholder();
         const element = document.createElement(elementName);
         const container = mfePlaceholder?.element.nativeElement as Comment;
-        
+
         container.parentNode?.insertBefore(element, container);
 
     }

@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@angular-architects/native-federation": "^20.1.2",
+    "@angular-architects/module-federation": "^20.0.0",
     "@angular-devkit/build-angular": "^20.1.2",
     "@angular/build": "^20.1.2",
     "@angular/cli": "^20.0.0",

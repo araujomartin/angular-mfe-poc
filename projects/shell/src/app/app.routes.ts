@@ -23,6 +23,19 @@ export const routes: Routes = [
         }
     },
     {
+        path: 'angular-15-mfe',
+        loadComponent: () => import('./components/wrapper/wrapper').then(m => m.Wrapper),
+        data: {
+            config: {
+                exposedModule: './web-component',
+                remoteName: 'angular-15-mfe',
+                elementName: 'angular-15-mfe',
+                kind: 'module-federation',
+                remoteEntry: 'http://localhost:3000/remoteEntry.js',
+            } as WrapperConfig
+        }
+    },
+    {
         path: '**',
         redirectTo: 'mfe-1'
     }

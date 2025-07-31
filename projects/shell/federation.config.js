@@ -12,6 +12,7 @@ module.exports = withNativeFederation({
     'rxjs/testing',
     'rxjs/webSocket',
     // Add further packages you don't need at runtime
+    '/^@module-federation/',
   ],
 
   // Please read our FAQ about sharing libs:
