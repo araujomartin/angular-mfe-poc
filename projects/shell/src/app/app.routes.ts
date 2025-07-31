@@ -9,7 +9,6 @@ export const routes: Routes = [
         loadComponent: () => loadNativeFederationRemote('mfe-1', './Component').then(m => m.App),
     },
     {
-        // link to the repo
         path: 'angular-19-mfe',
         loadComponent: () => import('./components/wrapper/wrapper').then(m => m.Wrapper),
         data: {
@@ -18,6 +17,7 @@ export const routes: Routes = [
                 remoteName: 'angular-19-mfe',
                 elementName: 'angular-19-mfe',
                 kind: 'native-federation',
+                // You need this project running on port 5000 (https://github.com/araujomartin/angular-19-remote)
                 remoteEntry: 'http://localhost:5000/remoteEntry.json',
             } as WrapperConfig
         }

@@ -1,59 +1,55 @@
-# AngularMfePoc
+# Angular Micro Frontend Example (MFE) with Native Federation
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+This repository demonstrates a micro frontend architecture using Angular 20 and `@angular-architects/native-federation`. It includes:
 
-## Development server
+- **Shell (Host App):** The main application that loads remote modules.
+- **mfe-1:** A remote Angular 20 application integrated via native federation.
 
-To start a local development server, run:
+## Getting Started
 
-```bash
-ng serve
+1. **Install dependencies:**
+   ```bash
+   bun install
+   ```
+
+2. **Run the shell and mfe-1 apps:**
+   ```bash
+   ng s shell --port 4200
+   ng s mfe-1 --port 4300
+   ```
+   By default, the shell loads `mfe-1` as a remote module.
+
+## Integrating Remotes
+
+- If you want to import other Angular applications with a different version, or applications built with other frameworks, you must expose them as **Web Components**.
+- The shell uses a wrapper component to load such remotes. You need to configure the remote to export a web component and provide its details (remote name, exposed module, element name, remote entry URL) in the shell’s route configuration.
+
+## Example
+
+To load a remote Angular app (version different from 20) or another framework:
+- Configure the remote to expose a web component.
+- Add its configuration to the shell’s routes (see `app.routes.ts`).
+
+```typescript
+{
+  path: 'angular-19-mfe',
+  loadComponent: () => import('./components/wrapper/wrapper').then(m => m.Wrapper),
+  data: {
+    config: {
+      exposedModule: './web-component',
+      remoteName: 'angular-19-mfe',
+      elementName: 'angular-19-mfe',
+      kind: 'native-federation',
+      remoteEntry: 'http://localhost:5000/remoteEntry.json',
+    }
+  }
+}
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Notes
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- For native federation, both shell and remote should use compatible Angular versions.
+- For different versions or frameworks, use web components for integration.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For Angular versions 16 and above, you can import the web component using Native Federation. For older Angular versions, you need to use Module Federation.
