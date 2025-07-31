@@ -31,6 +31,7 @@ export const routes: Routes = [
                 remoteName: 'angular-15-mfe',
                 elementName: 'angular-15-mfe',
                 kind: 'module-federation',
+                // You need this project running on port 3000 (https://github.com/araujomartin/angular-15-remote)
                 remoteEntry: 'http://localhost:3000/remoteEntry.js',
             } as WrapperConfig
         }

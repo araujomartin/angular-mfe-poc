@@ -24,6 +24,8 @@ This repository demonstrates a micro frontend architecture using Angular 20 and 
 - If you want to import other Angular applications with a different version, or applications built with other frameworks, you must expose them as **Web Components**.
 - The shell uses a wrapper component to load such remotes. You need to configure the remote to export a web component and provide its details (remote name, exposed module, element name, remote entry URL) in the shell’s route configuration.
 
+For Angular applications with versions lower than 16, Module Federation is used to load the remote application.
+
 ## Example
 
 To load a remote Angular app (version different from 20) or another framework:
@@ -53,3 +55,8 @@ To load a remote Angular app (version different from 20) or another framework:
 - For different versions or frameworks, use web components for integration.
 
 For Angular versions 16 and above, you can import the web component using Native Federation. For older Angular versions, you need to use Module Federation.
+
+## Example Remote Repositories
+
+- [angular-15-remote (Web Component, Angular 15, Module Federation)](https://github.com/araujomartin/angular-15-remote)
+- [angular-19-remote (Web Component, Angular 19, Native Federation)](https://github.com/araujomartin/angular-19-remote)
