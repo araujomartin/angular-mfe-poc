@@ -1,9 +1,11 @@
 # Angular Micro Frontend Example (MFE) with Native Federation
 
-This repository demonstrates a micro frontend architecture using Angular 20 and `@angular-architects/native-federation`. It includes:
+This repository demonstrates a micro frontend architecture using Angular 20 and `@angular-architects/native-federation` and `@angular-architects/module-federation`. It includes:
 
 - **Shell (Host App):** The main application that loads remote modules.
 - **mfe-1:** A remote Angular 20 application integrated via native federation.
+- **angular-19-mfe:** A remote Angular 19 application integrated via native federation.
+- **angular-15-mfe:** A remote Angular 15 application integrated via module federation.
 
 ## Getting Started
 
@@ -21,7 +23,7 @@ This repository demonstrates a micro frontend architecture using Angular 20 and 
 
 ## Integrating Remotes
 
-- If you want to import other Angular applications with a different version, or applications built with other frameworks, you must expose them as **Web Components**.
+- If you want to import other Angular applications with a different version, or applications built with other frameworks, you must expose them as **Web Components**, i used `@angular/elements`, to do this.
 - The shell uses a wrapper component to load such remotes. You need to configure the remote to export a web component and provide its details (remote name, exposed module, element name, remote entry URL) in the shell’s route configuration.
 
 For Angular applications with versions lower than 16, Module Federation is used to load the remote application.
@@ -54,7 +56,6 @@ To load a remote Angular app (version different from 20) or another framework:
 - For native federation, both shell and remote should use compatible Angular versions.
 - For different versions or frameworks, use web components for integration.
 
-For Angular versions 16 and above, you can import the web component using Native Federation. For older Angular versions, you need to use Module Federation.
 
 ## Example Remote Repositories
 
