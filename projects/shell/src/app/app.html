@@ -21,5 +21,8 @@
     </button>
   </div>
   <hr>
+  <input type="text" #input>
+  <button (click)="sendData(input.value)">Send</button>
+  <hr>
   <router-outlet></router-outlet>
 </main>

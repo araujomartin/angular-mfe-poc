@@ -6,17 +6,12 @@ import { loadRemoteModule as loadModuleFederationRemote } from '@angular-archite
 
 @Component({
     selector: 'app-wrapper',
-    imports: [
-
-    ],
+    imports: [],
     templateUrl: './wrapper.html',
     styleUrl: './wrapper.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Wrapper {
-    // readonly #elementRef = inject(ElementRef);
-    // readonly #vcr = inject(ViewContainerRef);
-
     protected readonly mfePlaceholder = viewChild('mfePlaceholder', { read: ViewContainerRef })
 
     // Don't forget to call withComponentInputBinding()

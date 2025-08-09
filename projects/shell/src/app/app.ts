@@ -17,4 +17,10 @@ export class App {
   protected readonly title = signal('shell');
   protected readonly angularVersion = require('../../../../package.json').dependencies['@angular/core'];
 
+  protected readonly sendData = (msg: string) => {
+    // Send data through a custom event
+    const event = new CustomEvent('shell', { detail: msg });
+    window.dispatchEvent(event);
+  }
+
 }
